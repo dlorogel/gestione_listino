@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		noDataText="{i18n>noValues}"
+		title="{i18n>selValues}"
+		search=".onSearch"
+		confirm=".onValueHelpDialogClose"
+		cancel=".onValueHelpDialogClose"
+		showClearButton="true"
+		items="{
+			path: 'dynamicModel>/',
+			sorter: {
+				path: 'key',
+				descending: false
+			}
+		}">
+		<StandardListItem
+            id="dynamicList"
+			selected="{selected}"
+			title="{dynamicModel>key}"
+			description="{dynamicModel>text}"
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>

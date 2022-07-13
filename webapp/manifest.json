@@ -1,0 +1,266 @@
+{
+    "_version": "1.28.0",
+    "sap.app": {
+        "id": "it.orogel.gestionelistino",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap-ux/fiori-freestyle-writer:basic",
+            "version": "0.11.15",
+            "toolsId": "34e7ab2d-4926-4110-8bd4-0e1aeef22021"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZZ1_ZLISTINO_CDS",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "listaSurg": {
+                "uri": "/sap/opu/odata/sap/ZZ1_ZLISTINO_SURG_CDS",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "listaTrasp": {
+                "uri": "/sap/opu/odata/sap/ZZ1_ZLISTINO_TRASP_CDS",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "sapData": {
+                "uri": "/sap/opu/odata/sap/ZATTRIBUTIANAGRAFICI_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ekorg": {
+                "uri": "/sap/opu/odata/sap/CMD_QLTY_BP_SUPLR_PURG_ALP_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ekpo": {
+                "uri": "/sap/opu/odata/sap/API_PURCHASEORDER_PROCESS_SRV",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "it-orogel-gestionelistino-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ZGESTIONELISTINO",
+                    "action": "Display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.84.7",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "it.orogel.gestionelistino.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            },
+            "surgModel": {
+                "dataSource": "listaSurg",
+                "preload": true,
+                "settings": {}
+            },
+            "traspModel": {
+                "dataSource": "listaTrasp",
+                "preload": true,
+                "settings": {}
+            },
+            "sapModel": {
+                "dataSource": "sapData",
+                "preload": true,
+                "settings": {}
+            },
+            "ekorgModel": {
+                "dataSource": "ekorg",
+                "preload": true,
+                "settings": {}
+            },
+            "ekpoModel": {
+                "dataSource": "ekpo",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "it.orogel.gestionelistino.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteHome",
+                    "pattern": "RouteHome",
+                    "target": [
+                        "TargetHome"
+                    ]
+                },
+                {
+                    "name": "RouteLista",
+                    "pattern": "Lista",
+                    "target": [
+                        "TargetLista"
+                    ]
+                },
+                {
+                    "name": "RouteListaSurg",
+                    "pattern": "ListaSurg",
+                    "target": [
+                        "TargetListaSurg"
+                    ]
+                },
+                {
+                    "name": "RouteListaTrasp",
+                    "pattern": "ListaTrasp",
+                    "target": [
+                        "TargetListaTrasp"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetHome": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Home",
+                    "viewName": "Home"
+                },
+                "TargetLista": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Lista",
+                    "viewName": "Lista"
+                },
+                "TargetListaSurg": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ListaSurg",
+                    "viewName": "ListaSurg"
+                },
+                "TargetListaTrasp": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "ListaTrasp",
+                    "viewName": "ListaTrasp"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "it.orogel.gestionelistino.view.Home",
+            "type": "XML",
+            "async": true,
+            "id": "Home"
+        },
+        "rootLista": {
+            "viewName": "it.orogel.gestionelistino.view.Lista",
+            "type": "XML",
+            "async": true,
+            "id": "Lista"
+        },
+        "rootListaSurg": {
+            "viewName": "it.orogel.gestionelistino.view.ListaSurg",
+            "type": "XML",
+            "async": true,
+            "id": "ListaSurg"
+        },
+        "rootListaTrasp": {
+            "viewName": "it.orogel.gestionelistino.view.ListaTrasp",
+            "type": "XML",
+            "async": true,
+            "id": "ListaTrasp"
+        }
+    }
+}

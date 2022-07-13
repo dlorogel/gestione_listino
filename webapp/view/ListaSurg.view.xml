@@ -1,0 +1,185 @@
+<mvc:View controllerName="it.orogel.gestionelistino.controller.ListaSurg"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:c="sap.ui.core"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartMultiInput="sap.ui.comp.smartmultiinput"
+    xmlns:layout="sap.ui.layout"
+    xmlns:o="sap.ui.layout.form"
+    xmlns="sap.ui.table"
+    xmlns:u="sap.ui.unified"
+    xmlns:fb="sap.ui.comp.filterbar">
+    <f:DynamicPage id="dynamicPageId">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <m:Title text="{i18n>list2}"/>
+                </f:heading>
+                <f:content>
+
+                </f:content>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <layout:HorizontalLayout allowWrapping="true">
+                    <layout:VerticalLayout class="sapUiMediumMarginEnd">
+                    </layout:VerticalLayout>
+                </layout:HorizontalLayout>
+                <f:content>
+                    <fb:FilterBar reset="onReset" search="onSearchFilter" showRestoreButton="true" showClearButton="true">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="{i18n>EKORG}" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <m:Input value="{filterModel>/EKORG}"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="{i18n>ZTIPLIST}" labelTooltip="Tooltip Example" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <m:Input value="{filterModel>/ZTIPLIST}"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="E" label="{i18n>ZDAT_FROM}" labelTooltip="Tooltip Example" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <m:DatePicker value="{filterModel>/ZDAT_FROM}" displayFormat="dd/MM/yyyy" valueFormat="yyyy-MM-dd"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="E1" label="{i18n>ZDAT_TO}" labelTooltip="Tooltip Example" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <m:DatePicker value="{filterModel>/ZDAT_TO}" displayFormat="dd/MM/yyyy" valueFormat="yyyy-MM-dd"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="U" label="{i18n>MATNR}" labelTooltip="Tooltip Example" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <m:Input value="{filterModel>/MATNR}"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem groupName="__$INTERNAL$" name="Z" label="{i18n>ZCANC}" labelTooltip="Tooltip Example" partOfCurrentVariant="true" visibleInFilterBar="true">
+                                <fb:control>
+                                    <m:CheckBox value="{filterModel>/ZCANC}"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <m:ScrollContainer id="dynheader" vertical="true" horizontal="false">
+                <!--<m:Input id="productInput2" type="{varianteModel>/variante}" placeholder="{i18n>phVariant}" value="{selectedVarModel>/selected/variante}" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="onOpenPopover" width="auto"/>-->
+                <layout:HorizontalLayout class="sapUiContentPadding">
+                    <m:Button text="{i18n>btnInsert}" type="Emphasized" press=""/>
+                    <m:Button text="{i18n>btnModify}" type="Emphasized" press=""/>
+                    <m:Button text="{i18n>btnDelete}" type="Emphasized" press=""/>
+                    <m:Button text="{i18n>btnRestore}" type="Emphasized" press=""/>
+                    <m:Button text="{i18n>btnImport}" type="Emphasized" press=""/>
+                    <m:Button text="{i18n>btnExport}" type="Emphasized" press=""/>
+                    <m:Button text="{i18n>btnApplyIncrement}" type="Emphasized" press=""/>
+
+
+                </layout:HorizontalLayout>
+                <Table id="listaSurg" rows="{path: 'zlistModelSurg>/',
+                            parameters: {filter: {path: 'EKORG;ZTIPLIST;ZDAT_FROM;ZDAT_TO;MATNR;ZDESCR;ZQUOT;ZSPESEGEN;ZCANC'}}}" selectionMode="MultiToggle" selectionBehavior="Row" rowSelectionChange=".onSelRow" alternateRowColors="true" visibleRowCount="15" paste="onPaste" ariaLabelledBy="title">
+                    <extension>
+                        <m:OverflowToolbar style="Clear">
+                            <m:Title id="title" text="{i18n>flpTitle}"/>
+                        </m:OverflowToolbar>
+                    </extension>
+                    <columns>
+                        <Column width="10em" sortProperty="EKORG" filterProperty="EKORG">
+                            <m:Label text="{i18n>EKORG}"/>
+                            <template>
+                                <m:Text text="{zlistModelSurg>EKORG}" wrapping="false"/>
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="ZTIPLIST" filterProperty="ZTIPLIST">
+                            <m:Label text="{i18n>ZTIPLIST}"/>
+                            <template>
+                                <m:ComboBox items="{path: 'typeListSurg>/', sorter: { path: 'typeListSurg>/' }}" selectedKey="{zlistModelSurg>ZTIPLIST}" editable="{= ${zlistModelSurg>insert} === true ? true : false}">
+                                    <c:Item key="{typeListSurg>key}" text="{typeListSurg>key} - {typeListSurg>text}"/>
+                                </m:ComboBox>
+                                <!--<m:Text text="{zlistModelSurg>ZTIPLIST}"/>-->
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="ZDAT_FROM" filterProperty="ZDAT_FROM">
+                            <m:Label text="{i18n>ZDAT_FROM}"/>
+                            <template>
+                                <!--<m:Text text="{zlistModelSurg>ZDAT_FROM}" wrapping="false"/>-->
+                                <m:DatePicker value="{path: 'zlistModelSurg>ZDAT_FROM',
+								formatter: '.formatter.fmFormatDate'}" displayFormat="dd.MM.yyyy" valueFormat="yyyy-MM-dd" editable="{= ${zlistModelSurg>insert} === true ? true : false}"/>
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="ZDAT_TO" filterProperty="ZDAT_TO">
+                            <m:Label text="{i18n>ZDAT_TO}"/>
+                            <template>
+                                <!--<m:Text text="{zlistModelSurg>ZDAT_TO}" wrapping="false"/>-->
+                                 <m:DatePicker value="{path: 'zlistModelSurg>ZDAT_TO',
+								formatter: '.formatter.fmFormatDate'}" displayFormat="dd.MM.yyyy" valueFormat="yyyy-MM-dd" editable="{= ${zlistModelSurg>insert} === true ? true : false}"/>
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="MATNR" filterProperty="MATNR">
+                            <m:Label text="{i18n>MATNR}"/>
+                            <template>
+                                <m:Text text="{zlistModelSurg>MATNR}" wrapping="false"/>
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="ZDESCR" filterProperty="ZDESCR">
+                            <m:Label text="{i18n>ZDESCR}"/>
+                            <template>
+                                <m:Text text="{zlistModelSurg>ZDESCR}" wrapping="false"/>
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="ZQUOT" filterProperty="ZQUOT">
+                            <m:Label text="{i18n>ZQUOT}"/>
+                            <template>
+                                <m:Text text="{zlistModelSurg>ZQUOT}" wrapping="false"/>
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="ZSPESEGEN" filterProperty="ZSPESEGEN">
+                            <m:Label text="{i18n>ZSPESEGEN}"/>
+                            <template>
+                                <m:Text text="{zlistModelSurg>ZSPESEGEN}" wrapping="false"/>
+                            </template>
+                        </Column>
+                        <Column width="10em" sortProperty="ZCANC" filterProperty="ZCANC">
+                            <m:Label text="{i18n>ZCANC}"/>
+                            <template>
+                                <m:Text text="{zlistModelSurg>ZCANC}" wrapping="false"/>
+                            </template>
+                        </Column>
+                    </columns>
+                </Table>
+            </m:ScrollContainer>
+        </f:content>
+    </f:DynamicPage>
+    <!--<Table id="_IDGenTable1" rows="{/ZZ1_ZLISTINO}" selectionMode="MultiToggle" visibleRowCount="7" paste="onPaste" ariaLabelledBy="title">
+		<extension>
+			<m:OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
+				<m:Title id="title" text="Products"/>
+			</m:OverflowToolbar>
+		</extension>
+		<columns>
+			<Column id="_IDGenColumn1" width="11rem">
+				<m:Label text="{EKORG}"/>
+				<template>
+					<m:Text text="{EKORG}" wrapping="false"/>
+				</template>
+			</Column>
+			<Column id="_IDGenColumn2" width="11rem">
+				<m:Label text="{ZTIPLIST}"/>
+				<template>
+					<m:Input value="{ZTIPLIST}"/>
+				</template>
+			</Column>
+			<Column width="6rem" hAlign="End">
+				<m:Label text="{ZTIPLIST}"/>
+				<template>
+					<m:Label text="{ZTIPLIST}"/>
+				</template>
+			</Column>
+		</columns>
+	</Table>-->
+</mvc:View>

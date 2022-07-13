@@ -1,0 +1,24 @@
+<mvc:View controllerName="it.orogel.gestionelistino.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" 
+    xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    displayBlock="true"
+    xmlns:m="sap.m"
+    xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+    xmlns="sap.ui.table">
+     <m:App id="app">
+   	<m:VBox class="sapUiSmallMargin">
+		<m:Label text="{i18n>titleListSelect}" labelFor="GroupA" />
+		<m:RadioButtonGroup id="GroupA">
+			<m:RadioButton text="{i18n>list1}" selected="{listaModel>/list1}"/>
+			<m:RadioButton text="{i18n>list2}" selected="{listaModel>/list2}"/>
+			<m:RadioButton text="{i18n>list3}" selected="{listaModel>/list3}"/>
+			<m:RadioButton text="{i18n>list4}" selected="{listaModel>/list4}"/>
+		</m:RadioButtonGroup>
+    <m:Button text="{i18n>btnGo}" type="Emphasized" press="onNavToList"/>
+	</m:VBox>
+    </m:App>
+</mvc:View>
