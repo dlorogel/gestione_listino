@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='FIORI_MENU')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='FIORI_MENU')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='FIORI_MENU')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='FIORI_MENU')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='FIORI_MENU')/$value">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='FIORI_MENU')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="../../../sap/zz1_zlistino_cds/$metadata">
+        <edmx:Include Namespace="ZZ1_ZLISTINO_CDS" Alias="SAP"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="zz1_zlistino_cds_van.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/SAP_UUID">
+                <Annotation Term="UI.Hidden"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/EKORG"/>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZTIPLIST"/>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZUM"/>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/MATNR"/>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="ZLISTINO"/>
+                            <PropertyValue Property="ID" String="ZLISTINO"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="General Information"/>
+                                        <PropertyValue Property="ID" String="ZLISTINOGeneralInformation"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record>
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Organizzazione Acquisti"/>
+                                    <PropertyValue Property="Value" Path="EKORG"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Tipo listino"/>
+                                    <PropertyValue Property="Value" Path="ZTIPLIST"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Data Inizio validità"/>
+                                    <PropertyValue Property="Value" Path="ZDAT_FROM"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Data fine validità"/>
+                                    <PropertyValue Property="Value" Path="ZDAT_TO"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Specie"/>
+                                    <PropertyValue Property="Value" Path="ZSPECIE"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Stagionalità"/>
+                                    <PropertyValue Property="Value" Path="ZSTAG"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Varietà"/>
+                                    <PropertyValue Property="Value" Path="ZVARIETA"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Raggruppamento Varietà"/>
+                                    <PropertyValue Property="Value" Path="ZGRVARIETA"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Certificazione Aziendale"/>
+                                    <PropertyValue Property="Value" Path="ZCERTAZ"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Certificazione Prodotto"/>
+                                    <PropertyValue Property="Value" Path="ZCERTPROD"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Residuo"/>
+                                    <PropertyValue Property="Value" Path="ZRESIDUO"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Certificazione commerciale"/>
+                                    <PropertyValue Property="Value" Path="ZCERTIFCOM"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Specifica"/>
+                                    <PropertyValue Property="Value" Path="ZSPECIFICA"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Lavorazione"/>
+                                    <PropertyValue Property="Value" Path="ZLAVORAZIONE"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Origine"/>
+                                    <PropertyValue Property="Value" Path="ZORIGINE"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Qualità (classificazione di qualità)"/>
+                                    <PropertyValue Property="Value" Path="ZQUALITA"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Calibrazione (classificazione di prodotto)"/>
+                                    <PropertyValue Property="Value" Path="ZCALIBRAZIONE"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Raggruppatore Calibrazione"/>
+                                    <PropertyValue Property="Value" Path="ZRAGGCAL"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Prezzo base"/>
+                                    <PropertyValue Property="Value" Path="ZPRZBASE_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Unità di misura costi"/>
+                                    <PropertyValue Property="Value" Path="ZUM"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Eventi Coltivazione"/>
+                                    <PropertyValue Property="Value" Path="ZEVCOLT"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Caratteristica raccolta e taglio"/>
+                                    <PropertyValue Property="Value" Path="ZSERRACTAG"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio di raccolta/taglio"/>
+                                    <PropertyValue Property="Value" Path="ZSERASTC"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio di raccolta/taglio"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSERASTC_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio carico automezzo"/>
+                                    <PropertyValue Property="Value" Path="ZSERCAR"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio carico automezzo"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSERCAR_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio assistenza tecnica"/>
+                                    <PropertyValue Property="Value" Path="ZSERASSTEC"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio di assistenza tecnica"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSERASSTEC_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio di desposito"/>
+                                    <PropertyValue Property="Value" Path="ZSERDEP"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio di desposito"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSERDEP_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio di calibrazione"/>
+                                    <PropertyValue Property="Value" Path="ZSERCAL"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo servizio di calibrazione"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSERCAL_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio extra 1"/>
+                                    <PropertyValue Property="Value" Path="ZSER1"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio extra 1"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSER1_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio extra 2"/>
+                                    <PropertyValue Property="Value" Path="ZSER2"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio extra 2"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSER2_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio extra 3"/>
+                                    <PropertyValue Property="Value" Path="ZSER3"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio extra 3"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSER3_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio extra 4"/>
+                                    <PropertyValue Property="Value" Path="ZSER4"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio extra 4"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSER4_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Servizio extra 5"/>
+                                    <PropertyValue Property="Value" Path="ZSER5"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Costo Servizio extra 5"/>
+                                    <PropertyValue Property="Value" Path="ZCOSSER5_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Raggruppamento di liquidazione (Zona)"/>
+                                    <PropertyValue Property="Value" Path="ZRAGGLIQ"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Campo politiche OP"/>
+                                    <PropertyValue Property="Value" Path="ZOP"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Mark Up"/>
+                                    <PropertyValue Property="Value" Path="ZMARKUP_V"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Codice materiale"/>
+                                    <PropertyValue Property="Value" Path="MATNR"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Label" String="Cancellato"/>
+                                    <PropertyValue Property="Value" Path="ZCANC"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record>
+                        <PropertyValue Property="TypeName" String="ZLISTINO"/>
+                        <PropertyValue Property="TypeNamePlural" String="ZLISTINOs"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="EKORG"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Organizzazione Acquisti"/>
+                            <PropertyValue Property="Value" Path="EKORG"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Tipo listino"/>
+                            <PropertyValue Property="Value" Path="ZTIPLIST"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Data Inizio validità"/>
+                            <PropertyValue Property="Value" Path="ZDAT_FROM"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Data fine validità"/>
+                            <PropertyValue Property="Value" Path="ZDAT_TO"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Specie"/>
+                            <PropertyValue Property="Value" Path="ZSPECIE"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Stagionalità"/>
+                            <PropertyValue Property="Value" Path="ZSTAG"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Varietà"/>
+                            <PropertyValue Property="Value" Path="ZVARIETA"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Raggruppamento Varietà"/>
+                            <PropertyValue Property="Value" Path="ZGRVARIETA"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Certificazione Aziendale"/>
+                            <PropertyValue Property="Value" Path="ZCERTAZ"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Certificazione Prodotto"/>
+                            <PropertyValue Property="Value" Path="ZCERTPROD"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Residuo"/>
+                            <PropertyValue Property="Value" Path="ZRESIDUO"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Certificazione commerciale"/>
+                            <PropertyValue Property="Value" Path="ZCERTIFCOM"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Specifica"/>
+                            <PropertyValue Property="Value" Path="ZSPECIFICA"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Lavorazione"/>
+                            <PropertyValue Property="Value" Path="ZLAVORAZIONE"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Origine"/>
+                            <PropertyValue Property="Value" Path="ZORIGINE"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Qualità (classificazione di qualità)"/>
+                            <PropertyValue Property="Value" Path="ZQUALITA"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Calibrazione (classificazione di prodotto)"/>
+                            <PropertyValue Property="Value" Path="ZCALIBRAZIONE"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Raggruppatore Calibrazione"/>
+                            <PropertyValue Property="Value" Path="ZRAGGCAL"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Prezzo base"/>
+                            <PropertyValue Property="Value" Path="ZPRZBASE_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Unità di misura costi"/>
+                            <PropertyValue Property="Value" Path="ZUM"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Eventi Coltivazione"/>
+                            <PropertyValue Property="Value" Path="ZEVCOLT"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Caratteristica raccolta e taglio"/>
+                            <PropertyValue Property="Value" Path="ZSERRACTAG"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio di raccolta/taglio"/>
+                            <PropertyValue Property="Value" Path="ZSERASTC"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio di raccolta/taglio"/>
+                            <PropertyValue Property="Value" Path="ZCOSSERASTC_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio carico automezzo"/>
+                            <PropertyValue Property="Value" Path="ZSERCAR"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio carico automezzo"/>
+                            <PropertyValue Property="Value" Path="ZCOSSERCAR_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio assistenza tecnica"/>
+                            <PropertyValue Property="Value" Path="ZSERASSTEC"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio di assistenza tecnica"/>
+                            <PropertyValue Property="Value" Path="ZCOSSERASSTEC_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio di desposito"/>
+                            <PropertyValue Property="Value" Path="ZSERDEP"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio di desposito"/>
+                            <PropertyValue Property="Value" Path="ZCOSSERDEP_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio di calibrazione"/>
+                            <PropertyValue Property="Value" Path="ZSERCAL"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo servizio di calibrazione"/>
+                            <PropertyValue Property="Value" Path="ZCOSSERCAL_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio extra 1"/>
+                            <PropertyValue Property="Value" Path="ZSER1"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio extra 1"/>
+                            <PropertyValue Property="Value" Path="ZCOSSER1_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio extra 2"/>
+                            <PropertyValue Property="Value" Path="ZSER2"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio extra 2"/>
+                            <PropertyValue Property="Value" Path="ZCOSSER2_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio extra 3"/>
+                            <PropertyValue Property="Value" Path="ZSER3"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio extra 3"/>
+                            <PropertyValue Property="Value" Path="ZCOSSER3_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio extra 4"/>
+                            <PropertyValue Property="Value" Path="ZSER4"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio extra 4"/>
+                            <PropertyValue Property="Value" Path="ZCOSSER4_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Servizio extra 5"/>
+                            <PropertyValue Property="Value" Path="ZSER5"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Costo Servizio extra 5"/>
+                            <PropertyValue Property="Value" Path="ZCOSSER5_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Raggruppamento di liquidazione (Zona)"/>
+                            <PropertyValue Property="Value" Path="ZRAGGLIQ"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Campo politiche OP"/>
+                            <PropertyValue Property="Value" Path="ZOP"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Mark Up"/>
+                            <PropertyValue Property="Value" Path="ZMARKUP_V"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Codice materiale"/>
+                            <PropertyValue Property="Value" Path="MATNR"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String="Cancellato"/>
+                            <PropertyValue Property="Value" Path="ZCANC"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

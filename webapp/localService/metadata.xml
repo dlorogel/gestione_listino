@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="http://orogeldev:44333/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZZ1_ZLISTINO_CDS" xml:lang="it" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="I_CurrencyType" sap:label="Divisa" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Currency"/>
+                </Key>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:text="Currency_Text" sap:label="Divisa" sap:quickinfo="Chiave divisa" sap:semantics="currency-code"/>
+                <Property Name="Currency_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Decimals" Type="Edm.Byte" sap:label="Decimali" sap:quickinfo="Numero di decimali"/>
+                <Property Name="CurrencyISOCode" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Codice ISO" sap:quickinfo="Codice divisa ISO"/>
+                <Property Name="AlternativeCurrencyKey" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Chiave alternativa" sap:quickinfo="Chiave altern."/>
+                <Property Name="IsPrimaryCurrencyForISOCrcy" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Primario" sap:quickinfo="Codice divisa SAP primario del codice ISO"/>
+            </EntityType>
+            <EntityType Name="I_CurrencyTextType" sap:label="Testo valuta" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Language"/>
+                    <PropertyRef Name="Currency"/>
+                </Key>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="to_Language/Language_Text" sap:label="Chiave lingua" sap:value-list="standard"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:text="to_Currency/Currency_Text" sap:label="Divisa" sap:quickinfo="Chiave divisa" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="CurrencyName" Type="Edm.String" MaxLength="40" sap:label="Descrizione"/>
+                <Property Name="CurrencyShortName" Type="Edm.String" MaxLength="15" sap:label="Testo breve"/>
+                <NavigationProperty Name="to_Currency" Relationship="ZZ1_ZLISTINO_CDS.assoc_953AD32A42F8CC110D2FDAB7C5274BF1" FromRole="FromRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1" ToRole="ToRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1"/>
+                <NavigationProperty Name="to_Language" Relationship="ZZ1_ZLISTINO_CDS.assoc_2FB7ED57453D0981D884820F302AC05F" FromRole="FromRole_assoc_2FB7ED57453D0981D884820F302AC05F" ToRole="ToRole_assoc_2FB7ED57453D0981D884820F302AC05F"/>
+            </EntityType>
+            <EntityType Name="I_LanguageType" sap:label="Lingua" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="Language_Text" sap:label="Chiave lingua"/>
+                <Property Name="Language_Text" Type="Edm.String" MaxLength="16" sap:label="Denominazione" sap:quickinfo="Definizione lingua" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LanguageISOCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Codice lingua" sap:quickinfo="Codice lingua SAP a due posizioni"/>
+            </EntityType>
+            <EntityType Name="ZZ1_ZLISTINOType" sap:label="ZLISTINO" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SAP_UUID"/>
+                </Key>
+                <Property Name="SAP_UUID" Type="Edm.Guid" Nullable="false" sap:label="UUID" sap:quickinfo="16 Byte UUID in 16 Bytes (Raw Format)"/>
+                <Property Name="EKORG" Type="Edm.String" MaxLength="4" sap:label="Organizzazione Acquisti"/>
+                <Property Name="ZTIPLIST" Type="Edm.String" MaxLength="3" sap:label="Tipo listino"/>
+                <Property Name="ZDAT_FROM" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data Inizio validità"/>
+                <Property Name="ZDAT_TO" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Data fine validità"/>
+                <Property Name="ZSPECIE" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Specie"/>
+                <Property Name="ZSTAG" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Stagionalità"/>
+                <Property Name="ZVARIETA" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Varietà"/>
+                <Property Name="ZGRVARIETA" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Raggruppamento Varietà"/>
+                <Property Name="ZCERTAZ" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Certificazione Aziendale"/>
+                <Property Name="ZCERTPROD" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Certificazione Prodotto"/>
+                <Property Name="ZRESIDUO" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Residuo"/>
+                <Property Name="ZCERTIFCOM" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Certificazione commerciale"/>
+                <Property Name="ZSPECIFICA" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Specifica"/>
+                <Property Name="ZLAVORAZIONE" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Lavorazione"/>
+                <Property Name="ZORIGINE" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Origine"/>
+                <Property Name="ZQUALITA" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Qualità (classificazione di qualità)"/>
+                <Property Name="ZCALIBRAZIONE" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Calibrazione (classificazione di prodotto)"/>
+                <Property Name="ZRAGGCAL" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative" sap:label="Raggruppatore Calibrazione"/>
+                <Property Name="ZPRZBASE_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZPRZBASE_C" sap:label="Prezzo base"/>
+                <Property Name="ZPRZBASE_C" Type="Edm.String" MaxLength="5" sap:text="ZPRZBASE_C_Text" sap:label="Prezzo base" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZPRZBASE_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZUM" Type="Edm.String" MaxLength="5" sap:label="Unità di misura costi"/>
+                <Property Name="ZEVCOLT" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Eventi Coltivazione"/>
+                <Property Name="ZSERRACTAG" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Caratteristica raccolta e taglio"/>
+                <Property Name="ZSERASTC" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio di raccolta/taglio"/>
+                <Property Name="ZCOSSERASTC_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSERASTC_C" sap:label="Costo Servizio di raccolta/taglio"/>
+                <Property Name="ZCOSSERASTC_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSERASTC_C_Text" sap:label="Costo Servizio di raccolta/taglio" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSERASTC_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSERCAR" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio carico automezzo"/>
+                <Property Name="ZCOSSERCAR_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSERCAR_C" sap:label="Costo Servizio carico automezzo" sap:quickinfo="Servizio assistenza tecnica"/>
+                <Property Name="ZCOSSERCAR_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSERCAR_C_Text" sap:label="Costo Servizio carico automezzo" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSERCAR_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSERASSTEC" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio assistenza tecnica"/>
+                <Property Name="ZCOSSERASSTEC_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSERASSTEC_C" sap:label="Costo Servizio di assistenza tecnica"/>
+                <Property Name="ZCOSSERASSTEC_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSERASSTEC_C_Text" sap:label="Costo Servizio di assistenza tecnica" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSERASSTEC_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSERDEP" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio di desposito"/>
+                <Property Name="ZCOSSERDEP_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSERDEP_C" sap:label="Costo Servizio di desposito"/>
+                <Property Name="ZCOSSERDEP_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSERDEP_C_Text" sap:label="Costo Servizio di desposito" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSERDEP_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSERCAL" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio di calibrazione"/>
+                <Property Name="ZCOSSERCAL_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSERCAL_C" sap:label="Costo servizio di calibrazione"/>
+                <Property Name="ZCOSSERCAL_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSERCAL_C_Text" sap:label="Costo servizio di calibrazione" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSERCAL_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSER1" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio extra 1"/>
+                <Property Name="ZCOSSER1_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSER1_C" sap:label="Costo Servizio extra 1"/>
+                <Property Name="ZCOSSER1_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSER1_C_Text" sap:label="Costo Servizio extra 1" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSER1_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSER2" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio extra 2"/>
+                <Property Name="ZCOSSER2_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSER2_C" sap:label="Costo Servizio extra 2"/>
+                <Property Name="ZCOSSER2_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSER2_C_Text" sap:label="Costo Servizio extra 2" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSER2_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSER3" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio extra 3"/>
+                <Property Name="ZCOSSER3_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSER3_C" sap:label="Costo Servizio extra 3"/>
+                <Property Name="ZCOSSER3_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSER3_C_Text" sap:label="Costo Servizio extra 3" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSER3_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSER4" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio extra 4"/>
+                <Property Name="ZCOSSER4_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSER4_C" sap:label="Costo Servizio extra 4"/>
+                <Property Name="ZCOSSER4_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSER4_C_Text" sap:label="Costo Servizio extra 4" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSER4_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZSER5" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Servizio extra 5"/>
+                <Property Name="ZCOSSER5_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZCOSSER5_C" sap:label="Costo Servizio extra 5"/>
+                <Property Name="ZCOSSER5_C" Type="Edm.String" MaxLength="5" sap:text="ZCOSSER5_C_Text" sap:label="Costo Servizio extra 5" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZCOSSER5_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ZRAGGLIQ" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Raggruppamento di liquidazione (Zona)"/>
+                <Property Name="ZOP" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Campo politiche OP"/>
+                <Property Name="ZMARKUP_V" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="ZMARKUP_C" sap:label="Mark Up"/>
+                <Property Name="ZMARKUP_C" Type="Edm.String" MaxLength="5" sap:text="ZMARKUP_C_Text" sap:label="Mark Up" sap:value-list="standard" sap:semantics="currency-code"/>
+                <Property Name="ZMARKUP_C_Text" Type="Edm.String" MaxLength="40" sap:label="Descrizione" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="MATNR" Type="Edm.String" MaxLength="40" sap:label="Codice materiale"/>
+                <Property Name="ZCANC" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="Cancellato"/>
+                <NavigationProperty Name="to_ZCOSSER1" Relationship="ZZ1_ZLISTINO_CDS.assoc_8B2515ED60A4E3DE5A9FFF28079C02D4" FromRole="FromRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4" ToRole="ToRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4"/>
+                <NavigationProperty Name="to_ZCOSSER2" Relationship="ZZ1_ZLISTINO_CDS.assoc_FA37A8D295A59A423AEC5AC6CC937F18" FromRole="FromRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18" ToRole="ToRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18"/>
+                <NavigationProperty Name="to_ZCOSSER3" Relationship="ZZ1_ZLISTINO_CDS.assoc_B83CF7041B016A04EE90E760A27C2A37" FromRole="FromRole_assoc_B83CF7041B016A04EE90E760A27C2A37" ToRole="ToRole_assoc_B83CF7041B016A04EE90E760A27C2A37"/>
+                <NavigationProperty Name="to_ZCOSSER4" Relationship="ZZ1_ZLISTINO_CDS.assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147" FromRole="FromRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147" ToRole="ToRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147"/>
+                <NavigationProperty Name="to_ZCOSSER5" Relationship="ZZ1_ZLISTINO_CDS.assoc_A1769A1A76BCD2F903B49D557855E80F" FromRole="FromRole_assoc_A1769A1A76BCD2F903B49D557855E80F" ToRole="ToRole_assoc_A1769A1A76BCD2F903B49D557855E80F"/>
+                <NavigationProperty Name="to_ZCOSSERASSTEC" Relationship="ZZ1_ZLISTINO_CDS.assoc_9A1C33B2814AC2AC376FB85A0288C6CB" FromRole="FromRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB" ToRole="ToRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB"/>
+                <NavigationProperty Name="to_ZCOSSERASTC" Relationship="ZZ1_ZLISTINO_CDS.assoc_50F41C2FC7202146D0CBBF66939377B1" FromRole="FromRole_assoc_50F41C2FC7202146D0CBBF66939377B1" ToRole="ToRole_assoc_50F41C2FC7202146D0CBBF66939377B1"/>
+                <NavigationProperty Name="to_ZCOSSERCAL" Relationship="ZZ1_ZLISTINO_CDS.assoc_A1874E8734216091B523B22D68CC6667" FromRole="FromRole_assoc_A1874E8734216091B523B22D68CC6667" ToRole="ToRole_assoc_A1874E8734216091B523B22D68CC6667"/>
+                <NavigationProperty Name="to_ZCOSSERCAR" Relationship="ZZ1_ZLISTINO_CDS.assoc_E7A062C81838D706F26A677233F3D3A6" FromRole="FromRole_assoc_E7A062C81838D706F26A677233F3D3A6" ToRole="ToRole_assoc_E7A062C81838D706F26A677233F3D3A6"/>
+                <NavigationProperty Name="to_ZCOSSERDEP" Relationship="ZZ1_ZLISTINO_CDS.assoc_6702A5608DD34672AA431DE697D18396" FromRole="FromRole_assoc_6702A5608DD34672AA431DE697D18396" ToRole="ToRole_assoc_6702A5608DD34672AA431DE697D18396"/>
+                <NavigationProperty Name="to_ZMARKUP" Relationship="ZZ1_ZLISTINO_CDS.assoc_D86C038C120044749384904AE6A5962A" FromRole="FromRole_assoc_D86C038C120044749384904AE6A5962A" ToRole="ToRole_assoc_D86C038C120044749384904AE6A5962A"/>
+                <NavigationProperty Name="to_ZPRZBASE" Relationship="ZZ1_ZLISTINO_CDS.assoc_7531C28C8E0751269742A97A7D2551E7" FromRole="FromRole_assoc_7531C28C8E0751269742A97A7D2551E7" ToRole="ToRole_assoc_7531C28C8E0751269742A97A7D2551E7"/>
+                <NavigationProperty Name="to__ZCOSSER1" Relationship="ZZ1_ZLISTINO_CDS.assoc_8A5B91615463CCD1D785F128F02FCCC6" FromRole="FromRole_assoc_8A5B91615463CCD1D785F128F02FCCC6" ToRole="ToRole_assoc_8A5B91615463CCD1D785F128F02FCCC6"/>
+                <NavigationProperty Name="to__ZCOSSER2" Relationship="ZZ1_ZLISTINO_CDS.assoc_CAFDB0AB506799608736EDCF6A255F4D" FromRole="FromRole_assoc_CAFDB0AB506799608736EDCF6A255F4D" ToRole="ToRole_assoc_CAFDB0AB506799608736EDCF6A255F4D"/>
+                <NavigationProperty Name="to__ZCOSSER3" Relationship="ZZ1_ZLISTINO_CDS.assoc_604E7E8FDF894B15B11106F324529D26" FromRole="FromRole_assoc_604E7E8FDF894B15B11106F324529D26" ToRole="ToRole_assoc_604E7E8FDF894B15B11106F324529D26"/>
+                <NavigationProperty Name="to__ZCOSSER4" Relationship="ZZ1_ZLISTINO_CDS.assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6" FromRole="FromRole_assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6" ToRole="ToRole_assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6"/>
+                <NavigationProperty Name="to__ZCOSSER5" Relationship="ZZ1_ZLISTINO_CDS.assoc_BC255F64D3754B9D1161508DB8CDA3FD" FromRole="FromRole_assoc_BC255F64D3754B9D1161508DB8CDA3FD" ToRole="ToRole_assoc_BC255F64D3754B9D1161508DB8CDA3FD"/>
+                <NavigationProperty Name="to__ZCOSSERASSTEC" Relationship="ZZ1_ZLISTINO_CDS.assoc_696AC0F9E51C634D4E9937E2059545B2" FromRole="FromRole_assoc_696AC0F9E51C634D4E9937E2059545B2" ToRole="ToRole_assoc_696AC0F9E51C634D4E9937E2059545B2"/>
+                <NavigationProperty Name="to__ZCOSSERASTC" Relationship="ZZ1_ZLISTINO_CDS.assoc_0AD547A1555EA515811DBA5C86357257" FromRole="FromRole_assoc_0AD547A1555EA515811DBA5C86357257" ToRole="ToRole_assoc_0AD547A1555EA515811DBA5C86357257"/>
+                <NavigationProperty Name="to__ZCOSSERCAL" Relationship="ZZ1_ZLISTINO_CDS.assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F" FromRole="FromRole_assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F" ToRole="ToRole_assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F"/>
+                <NavigationProperty Name="to__ZCOSSERCAR" Relationship="ZZ1_ZLISTINO_CDS.assoc_34256DD46985B1A5FF3D3071FBDD5FC7" FromRole="FromRole_assoc_34256DD46985B1A5FF3D3071FBDD5FC7" ToRole="ToRole_assoc_34256DD46985B1A5FF3D3071FBDD5FC7"/>
+                <NavigationProperty Name="to__ZCOSSERDEP" Relationship="ZZ1_ZLISTINO_CDS.assoc_A4E2B1D623F85E9DBDC584B7C5DCD549" FromRole="FromRole_assoc_A4E2B1D623F85E9DBDC584B7C5DCD549" ToRole="ToRole_assoc_A4E2B1D623F85E9DBDC584B7C5DCD549"/>
+                <NavigationProperty Name="to__ZMARKUP" Relationship="ZZ1_ZLISTINO_CDS.assoc_A12716ED3598588DBB758F84E7028D39" FromRole="FromRole_assoc_A12716ED3598588DBB758F84E7028D39" ToRole="ToRole_assoc_A12716ED3598588DBB758F84E7028D39"/>
+                <NavigationProperty Name="to__ZPRZBASE" Relationship="ZZ1_ZLISTINO_CDS.assoc_501619CA1F8E0976F3A510BF9599AB94" FromRole="FromRole_assoc_501619CA1F8E0976F3A510BF9599AB94" ToRole="ToRole_assoc_501619CA1F8E0976F3A510BF9599AB94"/>
+            </EntityType>
+            <Association Name="assoc_8B2515ED60A4E3DE5A9FFF28079C02D4" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4">
+                        <PropertyRef Name="ZCOSSER1_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_FA37A8D295A59A423AEC5AC6CC937F18" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18">
+                        <PropertyRef Name="ZCOSSER2_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_B83CF7041B016A04EE90E760A27C2A37" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_B83CF7041B016A04EE90E760A27C2A37"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_B83CF7041B016A04EE90E760A27C2A37"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_B83CF7041B016A04EE90E760A27C2A37">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_B83CF7041B016A04EE90E760A27C2A37">
+                        <PropertyRef Name="ZCOSSER3_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147">
+                        <PropertyRef Name="ZCOSSER4_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_A1769A1A76BCD2F903B49D557855E80F" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_A1769A1A76BCD2F903B49D557855E80F"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_A1769A1A76BCD2F903B49D557855E80F"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_A1769A1A76BCD2F903B49D557855E80F">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_A1769A1A76BCD2F903B49D557855E80F">
+                        <PropertyRef Name="ZCOSSER5_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_9A1C33B2814AC2AC376FB85A0288C6CB" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB">
+                        <PropertyRef Name="ZCOSSERASSTEC_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_50F41C2FC7202146D0CBBF66939377B1" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_50F41C2FC7202146D0CBBF66939377B1"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_50F41C2FC7202146D0CBBF66939377B1"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_50F41C2FC7202146D0CBBF66939377B1">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_50F41C2FC7202146D0CBBF66939377B1">
+                        <PropertyRef Name="ZCOSSERASTC_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_A1874E8734216091B523B22D68CC6667" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_A1874E8734216091B523B22D68CC6667"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_A1874E8734216091B523B22D68CC6667"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_A1874E8734216091B523B22D68CC6667">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_A1874E8734216091B523B22D68CC6667">
+                        <PropertyRef Name="ZCOSSERCAL_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_E7A062C81838D706F26A677233F3D3A6" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_E7A062C81838D706F26A677233F3D3A6"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_E7A062C81838D706F26A677233F3D3A6"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_E7A062C81838D706F26A677233F3D3A6">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_E7A062C81838D706F26A677233F3D3A6">
+                        <PropertyRef Name="ZCOSSERCAR_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_6702A5608DD34672AA431DE697D18396" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_6702A5608DD34672AA431DE697D18396"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_6702A5608DD34672AA431DE697D18396"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_6702A5608DD34672AA431DE697D18396">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_6702A5608DD34672AA431DE697D18396">
+                        <PropertyRef Name="ZCOSSERDEP_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_D86C038C120044749384904AE6A5962A" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_D86C038C120044749384904AE6A5962A"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_D86C038C120044749384904AE6A5962A"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_D86C038C120044749384904AE6A5962A">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_D86C038C120044749384904AE6A5962A">
+                        <PropertyRef Name="ZMARKUP_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_7531C28C8E0751269742A97A7D2551E7" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_7531C28C8E0751269742A97A7D2551E7"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_7531C28C8E0751269742A97A7D2551E7"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_7531C28C8E0751269742A97A7D2551E7">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_7531C28C8E0751269742A97A7D2551E7">
+                        <PropertyRef Name="ZPRZBASE_C"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_8A5B91615463CCD1D785F128F02FCCC6" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_8A5B91615463CCD1D785F128F02FCCC6"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_8A5B91615463CCD1D785F128F02FCCC6"/>
+            </Association>
+            <Association Name="assoc_CAFDB0AB506799608736EDCF6A255F4D" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_CAFDB0AB506799608736EDCF6A255F4D"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_CAFDB0AB506799608736EDCF6A255F4D"/>
+            </Association>
+            <Association Name="assoc_604E7E8FDF894B15B11106F324529D26" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_604E7E8FDF894B15B11106F324529D26"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_604E7E8FDF894B15B11106F324529D26"/>
+            </Association>
+            <Association Name="assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6"/>
+            </Association>
+            <Association Name="assoc_BC255F64D3754B9D1161508DB8CDA3FD" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_BC255F64D3754B9D1161508DB8CDA3FD"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_BC255F64D3754B9D1161508DB8CDA3FD"/>
+            </Association>
+            <Association Name="assoc_696AC0F9E51C634D4E9937E2059545B2" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_696AC0F9E51C634D4E9937E2059545B2"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_696AC0F9E51C634D4E9937E2059545B2"/>
+            </Association>
+            <Association Name="assoc_0AD547A1555EA515811DBA5C86357257" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_0AD547A1555EA515811DBA5C86357257"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_0AD547A1555EA515811DBA5C86357257"/>
+            </Association>
+            <Association Name="assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F"/>
+            </Association>
+            <Association Name="assoc_34256DD46985B1A5FF3D3071FBDD5FC7" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_34256DD46985B1A5FF3D3071FBDD5FC7"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_34256DD46985B1A5FF3D3071FBDD5FC7"/>
+            </Association>
+            <Association Name="assoc_A4E2B1D623F85E9DBDC584B7C5DCD549" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_A4E2B1D623F85E9DBDC584B7C5DCD549"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_A4E2B1D623F85E9DBDC584B7C5DCD549"/>
+            </Association>
+            <Association Name="assoc_A12716ED3598588DBB758F84E7028D39" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_A12716ED3598588DBB758F84E7028D39"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_A12716ED3598588DBB758F84E7028D39"/>
+            </Association>
+            <Association Name="assoc_501619CA1F8E0976F3A510BF9599AB94" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" Multiplicity="1" Role="FromRole_assoc_501619CA1F8E0976F3A510BF9599AB94"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="*" Role="ToRole_assoc_501619CA1F8E0976F3A510BF9599AB94"/>
+            </Association>
+            <Association Name="assoc_2FB7ED57453D0981D884820F302AC05F" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="1" Role="FromRole_assoc_2FB7ED57453D0981D884820F302AC05F"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_LanguageType" Multiplicity="0..1" Role="ToRole_assoc_2FB7ED57453D0981D884820F302AC05F"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_2FB7ED57453D0981D884820F302AC05F">
+                        <PropertyRef Name="Language"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_2FB7ED57453D0981D884820F302AC05F">
+                        <PropertyRef Name="Language"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_953AD32A42F8CC110D2FDAB7C5274BF1" sap:content-version="1">
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" Multiplicity="1" Role="FromRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1"/>
+                <End Type="ZZ1_ZLISTINO_CDS.I_CurrencyType" Multiplicity="1" Role="ToRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1">
+                        <PropertyRef Name="Currency"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1">
+                        <PropertyRef Name="Currency"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZZ1_ZLISTINO_CDS_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_Currency" EntityType="ZZ1_ZLISTINO_CDS.I_CurrencyType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_CurrencyText" EntityType="ZZ1_ZLISTINO_CDS.I_CurrencyTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="I_Language" EntityType="ZZ1_ZLISTINO_CDS.I_LanguageType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZZ1_ZLISTINO" EntityType="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="assoc_604E7E8FDF894B15B11106F324529D26" Association="ZZ1_ZLISTINO_CDS.assoc_604E7E8FDF894B15B11106F324529D26" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_604E7E8FDF894B15B11106F324529D26"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_604E7E8FDF894B15B11106F324529D26"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_9A1C33B2814AC2AC376FB85A0288C6CB" Association="ZZ1_ZLISTINO_CDS.assoc_9A1C33B2814AC2AC376FB85A0288C6CB" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_9A1C33B2814AC2AC376FB85A0288C6CB"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_6702A5608DD34672AA431DE697D18396" Association="ZZ1_ZLISTINO_CDS.assoc_6702A5608DD34672AA431DE697D18396" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_6702A5608DD34672AA431DE697D18396"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_6702A5608DD34672AA431DE697D18396"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_501619CA1F8E0976F3A510BF9599AB94" Association="ZZ1_ZLISTINO_CDS.assoc_501619CA1F8E0976F3A510BF9599AB94" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_501619CA1F8E0976F3A510BF9599AB94"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_501619CA1F8E0976F3A510BF9599AB94"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_0AD547A1555EA515811DBA5C86357257" Association="ZZ1_ZLISTINO_CDS.assoc_0AD547A1555EA515811DBA5C86357257" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_0AD547A1555EA515811DBA5C86357257"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_0AD547A1555EA515811DBA5C86357257"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_FA37A8D295A59A423AEC5AC6CC937F18" Association="ZZ1_ZLISTINO_CDS.assoc_FA37A8D295A59A423AEC5AC6CC937F18" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_FA37A8D295A59A423AEC5AC6CC937F18"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_2FB7ED57453D0981D884820F302AC05F" Association="ZZ1_ZLISTINO_CDS.assoc_2FB7ED57453D0981D884820F302AC05F" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_CurrencyText" Role="FromRole_assoc_2FB7ED57453D0981D884820F302AC05F"/>
+                    <End EntitySet="I_Language" Role="ToRole_assoc_2FB7ED57453D0981D884820F302AC05F"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_50F41C2FC7202146D0CBBF66939377B1" Association="ZZ1_ZLISTINO_CDS.assoc_50F41C2FC7202146D0CBBF66939377B1" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_50F41C2FC7202146D0CBBF66939377B1"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_50F41C2FC7202146D0CBBF66939377B1"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_A12716ED3598588DBB758F84E7028D39" Association="ZZ1_ZLISTINO_CDS.assoc_A12716ED3598588DBB758F84E7028D39" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_A12716ED3598588DBB758F84E7028D39"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_A12716ED3598588DBB758F84E7028D39"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147" Association="ZZ1_ZLISTINO_CDS.assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_4F8E4CA97AD16BCEBD7B9ABC6FC6C147"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_A1769A1A76BCD2F903B49D557855E80F" Association="ZZ1_ZLISTINO_CDS.assoc_A1769A1A76BCD2F903B49D557855E80F" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_A1769A1A76BCD2F903B49D557855E80F"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_A1769A1A76BCD2F903B49D557855E80F"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_CAFDB0AB506799608736EDCF6A255F4D" Association="ZZ1_ZLISTINO_CDS.assoc_CAFDB0AB506799608736EDCF6A255F4D" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_CAFDB0AB506799608736EDCF6A255F4D"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_CAFDB0AB506799608736EDCF6A255F4D"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_BC255F64D3754B9D1161508DB8CDA3FD" Association="ZZ1_ZLISTINO_CDS.assoc_BC255F64D3754B9D1161508DB8CDA3FD" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_BC255F64D3754B9D1161508DB8CDA3FD"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_BC255F64D3754B9D1161508DB8CDA3FD"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_A1874E8734216091B523B22D68CC6667" Association="ZZ1_ZLISTINO_CDS.assoc_A1874E8734216091B523B22D68CC6667" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_A1874E8734216091B523B22D68CC6667"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_A1874E8734216091B523B22D68CC6667"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_953AD32A42F8CC110D2FDAB7C5274BF1" Association="ZZ1_ZLISTINO_CDS.assoc_953AD32A42F8CC110D2FDAB7C5274BF1" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_CurrencyText" Role="FromRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_953AD32A42F8CC110D2FDAB7C5274BF1"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_696AC0F9E51C634D4E9937E2059545B2" Association="ZZ1_ZLISTINO_CDS.assoc_696AC0F9E51C634D4E9937E2059545B2" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_696AC0F9E51C634D4E9937E2059545B2"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_696AC0F9E51C634D4E9937E2059545B2"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_A4E2B1D623F85E9DBDC584B7C5DCD549" Association="ZZ1_ZLISTINO_CDS.assoc_A4E2B1D623F85E9DBDC584B7C5DCD549" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_A4E2B1D623F85E9DBDC584B7C5DCD549"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_A4E2B1D623F85E9DBDC584B7C5DCD549"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_B83CF7041B016A04EE90E760A27C2A37" Association="ZZ1_ZLISTINO_CDS.assoc_B83CF7041B016A04EE90E760A27C2A37" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_B83CF7041B016A04EE90E760A27C2A37"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_B83CF7041B016A04EE90E760A27C2A37"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_D86C038C120044749384904AE6A5962A" Association="ZZ1_ZLISTINO_CDS.assoc_D86C038C120044749384904AE6A5962A" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_D86C038C120044749384904AE6A5962A"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_D86C038C120044749384904AE6A5962A"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_8A5B91615463CCD1D785F128F02FCCC6" Association="ZZ1_ZLISTINO_CDS.assoc_8A5B91615463CCD1D785F128F02FCCC6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_8A5B91615463CCD1D785F128F02FCCC6"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_8A5B91615463CCD1D785F128F02FCCC6"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_34256DD46985B1A5FF3D3071FBDD5FC7" Association="ZZ1_ZLISTINO_CDS.assoc_34256DD46985B1A5FF3D3071FBDD5FC7" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_34256DD46985B1A5FF3D3071FBDD5FC7"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_34256DD46985B1A5FF3D3071FBDD5FC7"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6" Association="ZZ1_ZLISTINO_CDS.assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_4E4C1D4C472E5FB975C00CFB0F76E6F6"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_8B2515ED60A4E3DE5A9FFF28079C02D4" Association="ZZ1_ZLISTINO_CDS.assoc_8B2515ED60A4E3DE5A9FFF28079C02D4" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_8B2515ED60A4E3DE5A9FFF28079C02D4"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_E7A062C81838D706F26A677233F3D3A6" Association="ZZ1_ZLISTINO_CDS.assoc_E7A062C81838D706F26A677233F3D3A6" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_E7A062C81838D706F26A677233F3D3A6"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_E7A062C81838D706F26A677233F3D3A6"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_7531C28C8E0751269742A97A7D2551E7" Association="ZZ1_ZLISTINO_CDS.assoc_7531C28C8E0751269742A97A7D2551E7" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_7531C28C8E0751269742A97A7D2551E7"/>
+                    <End EntitySet="I_Currency" Role="ToRole_assoc_7531C28C8E0751269742A97A7D2551E7"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F" Association="ZZ1_ZLISTINO_CDS.assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZZ1_ZLISTINO" Role="FromRole_assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F"/>
+                    <End EntitySet="I_CurrencyText" Role="ToRole_assoc_7DDCD59F10BE5DBC76473BA7D95CAB9F"/>
+                </AssociationSet>
+                <FunctionImport Name="ZZ1_ZLISTINOSap_upsert" ReturnType="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" EntitySet="ZZ1_ZLISTINO" m:HttpMethod="POST">
+                    <Parameter Name="EKORG" Type="Edm.String" Mode="In" MaxLength="4"/>
+                    <Parameter Name="ZTIPLIST" Type="Edm.String" Mode="In" MaxLength="3"/>
+                    <Parameter Name="ZDAT_FROM" Type="Edm.DateTime" Mode="In" Precision="0"/>
+                    <Parameter Name="ZDAT_TO" Type="Edm.DateTime" Mode="In" Precision="0"/>
+                    <Parameter Name="ZSPECIE" Type="Edm.String" Mode="In" MaxLength="3"/>
+                    <Parameter Name="ZSTAG" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZVARIETA" Type="Edm.String" Mode="In" MaxLength="3"/>
+                    <Parameter Name="ZGRVARIETA" Type="Edm.String" Mode="In" MaxLength="4"/>
+                    <Parameter Name="ZCERTAZ" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCERTPROD" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZRESIDUO" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCERTIFCOM" Type="Edm.String" Mode="In" MaxLength="2"/>
+                    <Parameter Name="ZSPECIFICA" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZLAVORAZIONE" Type="Edm.String" Mode="In" MaxLength="2"/>
+                    <Parameter Name="ZORIGINE" Type="Edm.String" Mode="In" MaxLength="2"/>
+                    <Parameter Name="ZQUALITA" Type="Edm.String" Mode="In" MaxLength="2"/>
+                    <Parameter Name="ZCALIBRAZIONE" Type="Edm.String" Mode="In" MaxLength="2"/>
+                    <Parameter Name="ZRAGGCAL" Type="Edm.String" Mode="In" MaxLength="2"/>
+                    <Parameter Name="ZPRZBASE_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZPRZBASE_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZUM" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZEVCOLT" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZSERRACTAG" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZSERASTC" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSERASTC_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSERASTC_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSERCAR" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSERCAR_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSERCAR_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSERASSTEC" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSERASSTEC_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSERASSTEC_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSERDEP" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSERDEP_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSERDEP_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSERCAL" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSERCAL_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSERCAL_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSER1" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSER1_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSER1_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSER2" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSER2_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSER2_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSER3" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSER3_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSER3_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSER4" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSER4_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSER4_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZSER5" Type="Edm.String" Mode="In" MaxLength="1"/>
+                    <Parameter Name="ZCOSSER5_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZCOSSER5_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="ZRAGGLIQ" Type="Edm.String" Mode="In" MaxLength="4"/>
+                    <Parameter Name="ZOP" Type="Edm.String" Mode="In" MaxLength="3"/>
+                    <Parameter Name="ZMARKUP_V" Type="Edm.Decimal" Mode="In" Precision="16" Scale="3"/>
+                    <Parameter Name="ZMARKUP_C" Type="Edm.String" Mode="In" MaxLength="5"/>
+                    <Parameter Name="MATNR" Type="Edm.String" Mode="In" MaxLength="40"/>
+                    <Parameter Name="ZCANC" Type="Edm.String" Mode="In" MaxLength="1"/>
+                </FunctionImport>
+            </EntityContainer>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.I_CurrencyTextType/Language" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Language"/>
+                        <PropertyValue Property="CollectionPath" String="I_Language"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Language"/>
+                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Language_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.I_CurrencyTextType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Currency"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZPRZBASE_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZPRZBASE_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSERASTC_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSERASTC_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSERCAR_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSERCAR_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSERASSTEC_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSERASSTEC_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSERDEP_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSERDEP_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSERCAL_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSERCAL_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSER1_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSER1_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSER2_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSER2_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSER3_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSER3_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSER4_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSER4_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCOSSER5_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZCOSSER5_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZMARKUP_C" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Currency"/>
+                        <PropertyValue Property="CollectionPath" String="I_Currency"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ZMARKUP_C"/>
+                                    <PropertyValue Property="ValueListProperty" String="Currency"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINO_CDS_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+                <Annotation Term="Aggregation.ApplySupported">
+                    <Record>
+                        <PropertyValue Property="Transformations">
+                            <Collection>
+                                <String>aggregate</String>
+                                <String>groupby</String>
+                                <String>filter</String>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Rollup" EnumMember="None"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/EKORG" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCALIBRAZIONE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCERTAZ" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCERTIFCOM" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZCERTPROD" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZDAT_FROM" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZDAT_TO" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZLAVORAZIONE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZORIGINE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZQUALITA" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZRESIDUO" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZSPECIE" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZSPECIFICA" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZSTAG" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZTIPLIST" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType/ZVARIETA" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.ZZ1_ZLISTINOType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>ZCALIBRAZIONE</PropertyPath>
+                        <PropertyPath>ZQUALITA</PropertyPath>
+                        <PropertyPath>ZORIGINE</PropertyPath>
+                        <PropertyPath>ZLAVORAZIONE</PropertyPath>
+                        <PropertyPath>ZSPECIFICA</PropertyPath>
+                        <PropertyPath>ZCERTIFCOM</PropertyPath>
+                        <PropertyPath>ZRESIDUO</PropertyPath>
+                        <PropertyPath>ZCERTPROD</PropertyPath>
+                        <PropertyPath>ZCERTAZ</PropertyPath>
+                        <PropertyPath>ZVARIETA</PropertyPath>
+                        <PropertyPath>ZSTAG</PropertyPath>
+                        <PropertyPath>ZSPECIE</PropertyPath>
+                        <PropertyPath>ZDAT_TO</PropertyPath>
+                        <PropertyPath>ZDAT_FROM</PropertyPath>
+                        <PropertyPath>ZTIPLIST</PropertyPath>
+                        <PropertyPath>EKORG</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="ZZ1_ZLISTINO_CDS.I_CurrencyType/Currency" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.UnitSpecificScale" Path="Decimals"/>
+            </Annotations>
+            <atom:link rel="self" href="http://orogeldev:44333/sap/opu/odata/sap/ZZ1_ZLISTINO_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://orogeldev:44333/sap/opu/odata/sap/ZZ1_ZLISTINO_CDS/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
